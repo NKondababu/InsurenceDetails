@@ -24,7 +24,7 @@
     <ng-container *ngFor="let p of policyfilter | paginate: { itemsPerPage: 20, currentPage: p };">
       <tr>
         <td>{{ p.policyid }}</td>
-        <td>{{ p.dateofpurchase }}</td>
+        <td>{{ p.dateofpurchase | date:'MM/dd/yyyy' }}</td>
         <td>{{ p.customerid }}</td>
         <td>{{ p.premium }}</td>
         <td>
