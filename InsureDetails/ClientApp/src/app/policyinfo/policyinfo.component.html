@@ -1,0 +1,174 @@
+<!-- Modal -->
+<div class="modal fade" id="policyEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="policyEditLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #f7f7f7">
+        <h5 class="modal-title text-uppercase" id="staticBackdropLabel"><i class="fa-solid fa-square-pen"></i><span class="mx-2">Policy Update</span></h5>
+        <button id="btnPolicyEditclose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="policyupdateform" (ngSubmit)="policyupdate()" autoComplete="off" novalidate="novalidate">
+          <div class="form-row">
+            <div class="mb-3">
+              <label for="policyid" class="form-label">PolicyID</label>
+              <input type="text" class="form-control" id="policyid" formControlName="policyid"
+                     [ngClass]="{  'is-valid': (f.policyid.touched && f.policyid.valid),'is-invalid': submitted && f.policyid.errors  }">
+              <div *ngIf="submitted && f.policyid.errors" class="invalid-feedback">
+                <div *ngIf="f.policyid.errors.required">Policy ID is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="customerid" class="form-label">CustomerID</label>
+              <input type="text" class="form-control" id="customerid" formControlName="customerid"
+                     [ngClass]="{  'is-valid': (f.customerid.touched && f.customerid.valid),'is-invalid': submitted && f.customerid.errors  }">
+              <div *ngIf="submitted && f.customerid.errors" class="invalid-feedback">
+                <div *ngIf="f.customerid.errors.required">customerid is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="dateofpurchase" class="form-label">Date Of Purchase</label>
+              <input type="email" class="form-control" id="dateofpurchase" formControlName="dateofpurchase"
+                     [ngClass]="{  'is-valid': (f.dateofpurchase.touched && f.dateofpurchase.valid),'is-invalid': submitted && f.dateofpurchase.errors  }" >
+              <div *ngIf="submitted && f.dateofpurchase.errors" class="invalid-feedback">
+                <div *ngIf="f.dateofpurchase.errors.required">Date Of Purchase is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="fuel" class="form-label">Fuel</label>
+              <input type="text" class="form-control" id="fuel" formControlName="fuel"
+                     [ngClass]="{  'is-valid': (f.fuel.touched && f.fuel.valid),'is-invalid': submitted && f.fuel.errors  }">
+              <div *ngIf="submitted && f.fuel.errors" class="invalid-feedback">
+                <div *ngIf="f.fuel.errors.required">fuel is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="vehiclesegment" class="form-label">Vehicle Segment</label>
+              <input type="text" class="form-control" id="vehiclesegment" formControlName="vehiclesegment"
+                     [ngClass]="{ 'is-valid': (f.vehiclesegment.touched && f.vehiclesegment.valid),'is-invalid': submitted && f.vehiclesegment.errors  }">
+              <div *ngIf="submitted && f.vehiclesegment.errors" class="invalid-feedback">
+                <div *ngIf="f.vehiclesegment.errors.required">vehiclesegment is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="premium" class="form-label">Premium</label>
+              <input type="text" class="form-control" id="premium" formControlName="premium"
+                     [ngClass]="{ 'is-valid': (f.premium.touched && f.premium.valid),'is-invalid': submitted && f.premium.errors  }" max="1000000">
+              <div *ngIf="submitted && f.premium.errors" class="invalid-feedback">
+                <div *ngIf="f.premium.errors.required">premium is required</div> 
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="customerincomegroup" class="form-label">Customer Income Group</label>
+              <input type="text" class="form-control" id="customerincomegroup" formControlName="customerincomegroup"
+                     [ngClass]="{ 'is-valid': (f.customerincomegroup.touched && f.customerincomegroup.valid),'is-invalid': submitted && f.customerincomegroup.errors  }">
+              <div *ngIf="submitted && f.customerincomegroup.errors" class="invalid-feedback">
+                <div *ngIf="f.customerincomegroup.errors.required">customerincomegroup is required</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="customerregion" class="form-label">Customer Region</label>
+              <input type="text" class="form-control" id="customerregion" formControlName="customerregion"
+                     [ngClass]="{ 'is-valid': (f.customerregion.touched && f.customerregion.valid),'is-invalid': submitted && f.customerregion.errors  }">
+              <div *ngIf="submitted && f.customerregion.errors" class="invalid-feedback">
+                <div *ngIf="f.customerregion.errors.required">customerregion is required</div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="bodyinjuryliablity" formControlName="bodyinjuryliablity"
+                           [ngClass]="{'is-valid': (f.bodyinjuryliablity.touched && f.bodyinjuryliablity.valid),'is-invalid': submitted && f.bodyinjuryliablity.errors }">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      bodyinjuryliablity
+                    </label>
+                    <div *ngIf="submitted && f.bodyinjuryliablity.errors" class="invalid-feedback">
+                      <div *ngIf="f.bodyinjuryliablity.errors.required">bodyinjuryliablity is required</div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="personalinjuryprotection" formControlName="personalinjuryprotection"
+                           [ngClass]="{'is-valid': (f.personalinjuryprotection.touched && f.personalinjuryprotection.valid),'is-invalid': submitted && f.personalinjuryprotection.errors }">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      personalinjuryprotection
+                    </label>
+                    <div *ngIf="submitted && f.personalinjuryprotection.errors" class="invalid-feedback">
+                      <div *ngIf="f.personalinjuryprotection.errors.required">personalinjuryprotection is required</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row mt-2">
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="propertydamageliability" formControlName="propertydamageliability"
+                           [ngClass]="{'is-valid': (f.propertydamageliability.touched && f.propertydamageliability.valid),'is-invalid': submitted && f.propertydamageliability.errors }">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      propertydamageliability
+                    </label>
+                    <div *ngIf="submitted && f.propertydamageliability.errors" class="invalid-feedback">
+                      <div *ngIf="f.propertydamageliability.errors.required">propertydamageliability is required</div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="collision" formControlName="collision"
+                           [ngClass]="{'is-valid': (f.collision.touched && f.collision.valid),'is-invalid': submitted && f.collision.errors }">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      collision
+                    </label>
+                    <div *ngIf="submitted && f.collision.errors" class="invalid-feedback">
+                      <div *ngIf="f.collision.errors.required">collision is required</div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="comprehensive" formControlName="comprehensive"
+                           [ngClass]="{'is-valid': (f.comprehensive.touched && f.comprehensive.valid),'is-invalid': submitted && f.comprehensive.errors }">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      comprehensive
+                    </label>
+                    <div *ngIf="submitted && f.comprehensive.errors" class="invalid-feedback">
+                      <div *ngIf="f.comprehensive.errors.required">comprehensive is required</div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="customermartialstatus" formControlName="customermartialstatus"
+                           [ngClass]="{'is-valid': (f.customermartialstatus.touched && f.customermartialstatus.valid),'is-invalid': submitted && f.customermartialstatus.errors }">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      isMarried
+                    </label>
+                    <div *ngIf="submitted && f.customermartialstatus.errors" class="invalid-feedback">
+                      <div *ngIf="f.customermartialstatus.errors.required">customermartialstatus is required</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <span class="alert-danger">{{message}}</span>
+        <button type="button" class="btn btn-secondary" (click)="clear()"><i class="fa-solid fa-circle-xmark"></i><span class="mx-2">clear</span></button>
+        <button type="button" class="btn btn-primary" (click)="policyupdate()" id="btnsave" policyid="0"><i class="fa-solid fa-floppy-disk"></i><span class="mx-2">Save</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+

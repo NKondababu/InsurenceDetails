@@ -1,0 +1,108 @@
+
+<form>
+  <h1 id="tableLabel">Insurence Policies</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <input type="text" class="form-control mb-2" id="customerid" placeholder="policyID/customerID" (keyup)="search($event.target.value)">
+      </div>
+    </div>
+  </div>
+</form>
+<p *ngIf="!policyfilter"><em>Loading...</em></p>
+
+<table class="table table-striped table-bordered" aria-labelledby="tableLabel" *ngIf="policyfilter">
+  <thead>
+    <tr>
+      <th>Policy Number</th>
+      <th>Date Of Policy</th>
+      <th>Customer Number</th>
+      <th>Premium</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let p of policyfilter | paginate: { itemsPerPage: 20, currentPage: p };">
+      <tr>
+        <td>{{ p.policyid }}</td>
+        <td>{{ p.dateofpurchase }}</td>
+        <td>{{ p.customerid }}</td>
+        <td>{{ p.premium }}</td>
+        <td>
+          <button class="btn btn-primary" id="pills-home-tab" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + p.policyid" type="button"
+                  [attr.aria-controls]="p.policyid" aria-expanded="false">
+            More Info
+          </button>
+          <button class="btn btn-outline-info mx-2" data-bs-toggle="modal"
+                  data-bs-target="#policyEdit" id="{{'btnedit'+p.policyid}}"
+                  (click)="infor(p.policyid)">
+            <i class="fa fa-pencil" aria-hidden="true"></i><span class="p-1">Edit</span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5" class="hiddenRow">
+          <div class="collapse" id="{{p.policyid}}">
+            <div class="row mx-lg-4 mt-2">
+              <div class="col-md-4">
+
+                <span class="fw-bold">Fuel :</span>
+                <span class="mx-2">{{p.fuel}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="fw-bold">Vehicle Segment :</span>
+                <span class="mx-2"> {{p.vehiclesegment}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="fw-bold">Body Injury Liability :</span>
+                <span class="mx-2"> {{p.bodyinjuryliability ? 'Yes' : 'No'}}</span>
+              </div>
+            </div>
+            <div class="row mx-lg-4 mt-2">
+              <div class="col-md-4 ">
+                <span class="fw-bold">Personal Injury Protection :</span>
+                <span class="mx-2"> {{p.personalinjuryprotection ? 'Yes' : 'No'}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="fw-bold">Property Damage Liability :</span>
+                <span class="mx-2"> {{p.propertydamageliability ? 'Yes' : 'No'}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="fw-bold">Collision :</span>
+                <span class="mx-2"> {{p.collision ? 'Yes' : 'No'}}</span>
+              </div>
+            </div>
+            <div class="row mx-lg-4 mt-2">
+              <div class="col-md-4">
+                <span class="fw-bold">Comprehensive :</span>
+                <span class="mx-2"> {{p.comprehensive ? 'Yes' : 'No'}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="fw-bold">Customer Gender :</span>
+                <span class="mx-2"> {{p.customerGender}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="fw-bold">Customer Income Group :</span>
+                <span class="mx-2"> {{p.customerincomegroup}}</span>
+              </div>
+            </div>
+            <div class="row mx-lg-4 mt-2">
+              <div class="col-md-4">
+                <span class="fw-bold">Customer Region :</span>
+                <span class="mx-2"> {{p.customerregion}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="fw-bold">Customer Martial Status :</span>
+                <span class="mx-2"> {{p.customermartialstatus ? 'Married' : 'Unmarried'}}</span>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event" class="float-end"></pagination-controls>  
+<app-policyinfo [policy]="totalpolicy" (parentFun)="GetInsure()"></app-policyinfo>
+
+
+
