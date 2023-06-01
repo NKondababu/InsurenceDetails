@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace InsureDetails.DAL
 {
+    //To make the connection object by taking the connection string from the app settings json
+    //we need to register this in startup services to get access of configurations
     public static class ConfigSettings
     {
         public static ConnectionStrings ConnectionStrings { get; set; }

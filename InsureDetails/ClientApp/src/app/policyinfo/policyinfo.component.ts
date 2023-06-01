@@ -10,10 +10,10 @@ import { PolicyDetails } from '../policydetails/policydetails.component';
   styleUrls: ['./policyinfo.component.css']
 })
 export class PolicyinfoComponent implements OnInit {
-  @Input() policy: any;
+  @Input() policy: any; //To get data from the parent
   policyinfo: any;
   policyid: any;
-  policyupdateform: FormGroup;
+  policyupdateform: FormGroup; // To operate with reactive form
   private stateID: number;
   public message: string = '';
   submitted = false;
@@ -24,6 +24,7 @@ export class PolicyinfoComponent implements OnInit {
     this.Createform();
   }
 
+  //creating a reactive form with controler validations
   Createform() {
     this.policyupdateform = this.formBuilder.group({
       policyid: new FormControl('', [Validators.required]),
@@ -43,10 +44,12 @@ export class PolicyinfoComponent implements OnInit {
     })
   };
 
+  //To get form controls reference
   public get f() {
     return this.policyupdateform.controls;
   }
 
+  //To update the form deatils using a action call
   policyupdate() {
     this.submitted = true;
     if (this.policyupdateform.valid) {
@@ -57,22 +60,19 @@ export class PolicyinfoComponent implements OnInit {
       objpolicyupdate.vehiclesegment = this.policyupdateform.controls["vehiclesegment"].value;
       objpolicyupdate.premium = parseInt(this.policyupdateform.controls["premium"].value);
       objpolicyupdate.customerincomegroup = this.policyupdateform.controls["customerincomegroup"].value;
-      objpolicyupdate.customerregion = this.policyupdateform.controls["customerregion"].value;
-      //isStateUseClientData
+      objpolicyupdate.customerregion = this.policyupdateform.controls["customerregion"].value; 
       if (this.policyupdateform.controls["bodyinjuryliablity"].value === null || this.policyupdateform.controls["bodyinjuryliablity"].value === false) {
         objpolicyupdate.bodyinjuryliablity = false;
       }
       else if (this.policyupdateform.controls["bodyinjuryliablity"].value === true) {
         objpolicyupdate.bodyinjuryliablity = true;
-      }
-      //isStateUseOperator
+      } 
       if (this.policyupdateform.controls["personalinjuryprotection"].value === null || this.policyupdateform.controls["personalinjuryprotection"].value === false) {
         objpolicyupdate.personalinjuryprotection = false;
       }
       else if (this.policyupdateform.controls["personalinjuryprotection"].value === true) {
         objpolicyupdate.personalinjuryprotection = true;
-      }
-      //isStateUseProcess
+      } 
       if (this.policyupdateform.controls["propertydamageliability"].value === null || this.policyupdateform.controls["propertydamageliability"].value === false) {
         objpolicyupdate.propertydamageliability = false;
       }
@@ -115,6 +115,8 @@ export class PolicyinfoComponent implements OnInit {
       this.message = "Please fill the details";
     }
   }
+
+  //To populate the form using object data
   info(id: number) {
     this.policyinfo = this.policy.filter(s => s.policyid == id);
     this.Createform();
@@ -138,10 +140,10 @@ export class PolicyinfoComponent implements OnInit {
     document.getElementById("btnsave").setAttribute("policyid", this.policyinfo[0].policyid.toString());
   }
 
+  //To clear the form and global things
   clear() {
     this.policyupdateform.reset();
-    this.message = "";
-    this.submitted = false;
+    this.message = ""; 
   }
 
   close() {

@@ -7,24 +7,25 @@ using System.Threading.Tasks;
 
 namespace InsureDetails.Controllers
 {
+    //Controller to perform actions from the UI
     [ApiController]
     [Route("[controller]")]
     public class PolicyController : ControllerBase
-    {
-        Business_Logic.blInsureDetailscs blInsureDetailscs = new Business_Logic.blInsureDetailscs();
+    { 
+        //To get policy details from db by calling business logic class
         [HttpGet]
         [Route("policy_Get")]
         public PolicyDetails[] Get()
-        {
-            return blInsureDetailscs.policyDetails_GET(); 
+        { 
+            return new Business_Logic.blInsureDetailscs().policyDetails_GET(); 
         }
+
+        //To update details to db
         [HttpPost]
         [Route("policy_Update")]
-        public IActionResult policy_Update(PolicyDetails policyDetails)
-        {
-            var message = blInsureDetailscs.policy_Update(policyDetails);
-
-            return Ok(message);
+        public bool policy_Update(PolicyDetails policyDetails)
+        {  
+            return new Business_Logic.blInsureDetailscs().policy_Update(policyDetails);
         }
     }
 }

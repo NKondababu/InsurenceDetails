@@ -12,15 +12,15 @@ export class PolicydetailsComponent implements OnInit {
   public policyfilter: any;
   p: number = 1;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private http: HttpClient) {
     this.GetInsure();
   }
-  @ViewChild(PolicyinfoComponent, { static: false }) PolicyInfo: PolicyinfoComponent;
+  @ViewChild(PolicyinfoComponent, { static: false }) PolicyInfo: PolicyinfoComponent; //to access the child component to transfer data
 
   ngOnInit() {
   }
-  search(searchstring: string) {
-    console.log(searchstring);
+  //To perform search operation
+  search(searchstring: string) { 
     if (searchstring != "" && searchstring.length>0) {
       this.policyfilter = this.totalpolicy.filter(t => t.policyid.toString().includes(searchstring) || t.customerid.toString().includes(searchstring));
     }
@@ -29,6 +29,7 @@ export class PolicydetailsComponent implements OnInit {
     }
   }
 
+  //To get details by calling an action using http client
   GetInsure() {
     this.http.get('Policy/policy_Get').subscribe(result => {
       this.totalpolicy = result;
@@ -36,13 +37,13 @@ export class PolicydetailsComponent implements OnInit {
     }, error => console.error(error));
   }
 
+  //Calling child component 
   infor(id: number) {
     this.PolicyInfo.info(id);
-  }
-  edit(id: number) {
-    //this.StateEdit.State_GET_ID(id);
-  }
+  } 
 }
+
+//Object for complete details
 export class PolicyDetails {
   policyid: number;
   dateofpurchase: string;
